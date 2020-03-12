@@ -1,9 +1,22 @@
-const Joi = require("joi");
-const express =  require('express');
-const app = express();
+// @author: Rohith.
+// This example express_node.js walks you through the implementation of various functions(CRUD, Create, Read, Update, Delete).
+// I have used POSTMAN to check the functionality of PUT, POST, DELETE methods.
+// GET - to the get/send the request to the server and send the http response back to the client
+// PUT - to put/change the value of corresponding id in the database.
+// POST - to post (id:value) pairs to the existing database.
+// DELETE - to delete the existing value from the database(id to be given by the client)
 
+// one of the node packages for validation.
+const Joi = require("joi");
+// one of the node packages for easy development of REST apis.
+const express =  require('express');
+// Create an express object
+const app = express();
+// To use the json parsing, while put, post, get, delete requests.
 app.use(express.json());
 
+
+// We are not using any database. So, I have created an array of courses.
 const courses = [
     { id:1, name: 'course1' },
     { id:2, name: 'course2' },
@@ -11,7 +24,7 @@ const courses = [
 
 ];
 
-
+// Get request.
 app.get('/',(req, res)=>{
     res.send("Welcome to the courses.");
 });
@@ -113,21 +126,6 @@ app.delete('/api/courses/:id', (req, res)=>{
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Lets create a function to validate the course
 function validateCourse(course){
     const schema = {
@@ -138,6 +136,6 @@ function validateCourse(course){
 }
 
 
-// PORT
+// PORT; better way of assigning the port to the localhost.
 const port = process.env.PORT || 3000;
 app.listen(port, ()=>console.log(`Listening on port ${port}...`));
